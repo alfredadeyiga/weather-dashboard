@@ -1,0 +1,121 @@
+<div
+  class="flex flex-col gap-8 py-4 items-center justify-between md:py-8 xl:flex-row xl:items-stretch 2xl:py-12"
+>
+  <div
+    class="flex w-full justify-center items-center max-w-[400px] p-8 bg-primary rounded-[30px] drop-shadow-[10px_10px_4px_rgba(0,0,0,0.5)] md:max-w-[700px] md:p-12 xl:max-w-[500px] 2xl:max-w-[650px]"
+  >
+    <div class="flex flex-col gap-8 items-center md:gap-14">
+      <h1 class="text-2xl font-semibold text-text text-center md:text-3xl 2xl:text-4xl">
+        {{ dateTime()?.location }}
+      </h1>
+      <div class="flex flex-col gap-1 items-center">
+        <h1 class="text-5xl font-semibold text-text md:text-6xl 2xl:text-8xl">
+          {{ dateTime()?.time }}
+        </h1>
+        <p class="text-text 2xl:text-xl">{{ dateTime()?.date }}</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex w-full justify-center items-center flex-wrap gap-12 py-12 px-10 max-w-[400px] bg-primary rounded-[30px] drop-shadow-[10px_10px_4px_rgba(0,0,0,0.5)] md:justify-between md:gap-6 md:p-12 md:max-w-[700px] xl:max-w-[650px] 2xl:max-w-[800px]"
+  >
+    <div class="flex flex-col h-full gap-6 justify-between md:items-center">
+      <div class="flex flex-col gap-2 md:items-center">
+        @if (unit.unit() === 'celsius'){
+        <h1
+          class="text-5xl font-semibold bg-gradient bg-clip-text text-transparent md:text-6xl 2xl:text-7xl"
+        >
+          {{ currentWeather()?.temp_c | number : "1.0-0" }}°C
+        </h1>
+        } @else {
+        <h1
+          class="text-5xl font-semibold bg-gradient bg-clip-text text-transparent md:text-6xl 2xl:text-7xl"
+        >
+          {{ currentWeather()?.temp_f | number : "1.0-0" }}°F
+        </h1>
+        }
+        <p class="font-semibold text-text 2xl:text-xl">
+          Feels like @if (unit.unit() === 'celsius'){
+          <span class="text-lg 2xl:text-3xl"
+            >{{ currentWeather()?.feelslike_c | number : "1.0-0" }}°C</span
+          >} @else {<span class="text-lg 2xl:text-3xl"
+            >{{ currentWeather()?.feelslike_f | number : "1.0-0" }}°F</span
+          >}
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 md:gap-4">
+        <div class="flex gap-3 items-center">
+          <div class="sunrise w-8 h-8 bg-contain 2xl:w-12 2xl:h-12"></div>
+          <div class="flex flex-col">
+            <p class="font-semibold text-text 2xl:text-xl">Sunrise</p>
+            <p class="font-semibold text-text">{{ astro()?.sunrise }}</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-center">
+          <div class="sunset w-8 h-8 bg-contain 2xl:w-12 2xl:h-12"></div>
+          <div class="flex flex-col">
+            <p class="font-semibold text-text 2xl:text-xl">Sunset</p>
+            <p class="font-semibold text-text">{{ astro()?.sunset }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center gap-6">
+      <img
+        src="{{ currentWeather()?.icon }}"
+        class="w-[100px] h-[100px] md:w-[120px] md:h-[120px]"
+      />
+      <p
+        class="w-[100px] text-center text-lg font-semibold text-text md:w-[150px] 2xl:text-3xl"
+      >
+        {{ currentWeather()?.condition }}
+      </p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-7 md:grid md:grid-cols-2">
+      <div class="flex gap-4 items-center md:flex-col md:gap-1">
+        <div
+          class="humidity w-10 h-10 md:w-12 md:h-12 bg-contain bg-no-repeat bg-center 2xl:w-14 2xl:h-14"
+        ></div>
+        <div class="flex flex-col gap-1 md:items-center md:gap-2">
+          <p class="font-semibold order-1 text-text 2xl:text-xl">
+            {{ currentWeather()?.humidity | number : "1.0-0" }}%
+          </p>
+          <p class="text-text md:order-1">Humidity</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-center md:flex-col md:gap-1">
+        <div
+          class="wind w-10 h-10 md:w-12 md:h-12 bg-contain bg-no-repeat bg-center 2xl:w-14 2xl:h-14"
+        ></div>
+        <div class="flex flex-col gap-1 md:items-center md:gap-2">
+          <p class="font-semibold order-1 text-text 2xl:text-xl">
+            {{ currentWeather()?.wind | number : "1.0-0" }}km/h
+          </p>
+          <p class="text-text md:order-1">Wind</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-center md:flex-col md:gap-1">
+        <div
+          class="pressure w-10 h-10 md:w-12 md:h-12 bg-contain bg-no-repeat bg-center 2xl:w-14 2xl:h-14"
+        ></div>
+        <div class="flex flex-col gap-1 md:items-center md:gap-2">
+          <p class="font-semibold order-1 text-text 2xl:text-xl">
+            {{ currentWeather()?.pressure }}hPa
+          </p>
+          <p class="text-text md:order-1">Pressure</p>
+        </div>
+      </div>
+      <div class="flex gap-4 items-center md:flex-col md:gap-1">
+        <div
+          class="uv w-10 h-10 md:w-12 md:h-12 bg-contain bg-no-repeat bg-center 2xl:w-14 2xl:h-14"
+        ></div>
+        <div class="flex flex-col gap-1 md:items-center md:gap-2">
+          <p class="font-semibold order-1 text-text 2xl:text-xl">
+            {{ currentWeather()?.uv | number : "1.0-0" }}
+          </p>
+          <p class="text-text md:order-1">UV Index</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

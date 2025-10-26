@@ -1,0 +1,22 @@
+<div
+  class="absolute z-10 flex flex-col w-full px-4 py-3 mt-2 bg-primary rounded-3xl drop-shadow-[10px_10px_4px_rgba(0,0,0,0.5)]"
+>
+  @if (isLoading()) {
+  <div class="h-[100px]">
+    <app-spinner />
+  </div>
+  } @if (isError()) {
+  <div class="flex h-[100px] justify-center items-center">
+    <p class="font-semibold text-text text-lg">No results</p>
+  </div>
+  } @for (result of results(); track result.name){
+  <div
+    class="flex px-4 py-3 cursor-pointer rounded-lg transition-colors duration-50 ease-in-out hover:bg-hover"
+    (click)="setLocation(result.region)"
+  >
+    <p class="font-semibold text-text text-lg 2xl:text-xl">
+      {{ result.name }}, {{ result.country }}
+    </p>
+  </div>
+  }
+</div>

@@ -1,0 +1,84 @@
+<div
+  class="flex py-4 gap-8 justify-between items-center md:py-8 lg:gap-12 2xl:py-12"
+>
+  <div class="hidden gap-12 lg:flex">
+    <div class="flex flex-col items-center gap-1">
+      <div
+        class="flex w-20 h-8 bg-toggle border border-border rounded-full items-center px-1"
+      >
+        <div
+          class="w-[25px] h-[25px] bg-black rounded-full cursor-pointer transition-transform duration-300 ease-in-out"
+          (click)="theme.changeTheme()"
+          [ngClass]="{ 'translate-x-[46px]': theme.isDarkMode() }"
+        ></div>
+      </div>
+      <p class="font-bold text-text 2xl:text-lg 2xl:leading-7">
+        {{ theme.isDarkMode() ? "Dark mode" : "Light mode" }}
+      </p>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <div
+        class="flex w-20 h-8 bg-toggle border border-border rounded-full items-center px-1"
+      >
+        <div
+          class="w-[25px] h-[25px] bg-black rounded-full cursor-pointer transition-transform duration-300 ease-in-out"
+          (click)="unit.changeUnit()"
+          [ngClass]="{ 'translate-x-[46px]': unit.unit() === 'fahrenheit' }"
+        ></div>
+      </div>
+      <p class="font-bold text-text 2xl:text-lg 2xl:leading-7">
+        {{ unit.unit() === "celsius" ? "Celsius" : "Fahrenheit" }}
+      </p>
+    </div>
+  </div>
+  <div
+    class="menu w-7 h-7 bg-contain cursor-pointer lg:hidden"
+    (click)="toggleSidebar()"
+  ></div>
+  <div
+    class="relative flex flex-col flex-1 max-w-[600px] md:flex xl:max-w-[650px]"
+    [ngClass]="{ hidden: hideSearch() }"
+  >
+    <div
+      class="flex w-full rounded-full bg-primary border border-border shadow-[0px_4px_40px_rgba(0,0,0,0.25)] px-4 py-3 items-center justify-between gap-4 md:px-6 md:py-4"
+    >
+      <div class="search w-6 h-6 bg-contain bg-no-repeat"></div>
+      <input
+        type="text"
+        class="truncate w-full text-placeholder placeholder-placeholder bg-transparent outline-none 2xl:text-lg 2xl:leading-7"
+        placeholder="Search for your preferred city"
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+      />
+    </div>
+    @if (searchQuery().trim() !== ''){
+    <app-search-results [query]="searchQuery()" (onClick)="changeLocation()" />
+    }
+  </div>
+  @if (!hideSearch()) {
+  <div
+    class="close w-7 h-7 bg-contain bg-center bg-no-repeat md:hidden"
+    (click)="toggleSearch()"
+  ></div>
+  }
+  <div
+    class="flex gap-4 items-center md:flex"
+    [ngClass]="{ hidden: !hideSearch() }"
+  >
+    <div
+      class="search-nav w-7 h-7 bg-center bg-contain bg-no-repeat cursor-pointer md:hidden"
+      (click)="toggleSearch()"
+    ></div>
+    <div
+      class="flex rounded-full px-4 py-2 shadow-[0px_4px_40px_rgba(0,0,0,0.25)] bg-location items-center gap-2"
+    >
+      <img src="images/location.png" class="w-6 h-6" />
+      <p class="font-bold text-white/80 md:text-lg 2xl:text-xl 2xl:leading-7">
+        {{ location() }}
+      </p>
+    </div>
+  </div>
+</div>
+@if (!hideSidebar()){
+<app-sidebar (onClose)="toggleSidebar()" />
+}

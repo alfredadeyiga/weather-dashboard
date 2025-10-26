@@ -1,0 +1,13 @@
+<div class="flex flex-col px-4 md:px-8 2xl:px-20">
+  <app-header [location]="userLocation()" />
+  @if (spinner.isLoading()){
+  <app-spinner />
+  } @else if(error.isError()){
+  <app-error />
+  } @else {
+  <app-details />
+  <app-forecasts />
+  } @if (showPermission()){
+  <app-permission (onClick)="hidePermission($event)" />
+  }
+</div>

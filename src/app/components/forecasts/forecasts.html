@@ -1,0 +1,71 @@
+<div
+  class="flex flex-col gap-8 py-4 items-center justify-between md:pt-0 md:pb-8 xl:py-8 xl:flex-row xl:items-stretch"
+>
+  <div
+    class="flex flex-col w-full justify-center items-center max-w-[400px] p-12 bg-primary gap-4 rounded-[30px] drop-shadow-[10px_10px_4px_rgba(0,0,0,0.5)] md:max-w-[700px] xl:gap-8 xl:p-8 xl:max-w-[450px] 2xl:max-w-[600px] order-1"
+  >
+    <h1 class="font-semibold text-text text-xl 2xl:text-3xl">
+      {{ dailyWeather().length }} Days Forecast:
+    </h1>
+    <div class="flex flex-col w-full md:px-12 xl:px-8">
+      @for (day of dailyWeather(); track day.date){
+      <div class="flex items-center justify-between">
+        <img src="{{ day.icon }}" class="w-12 h-12 2xl:w-14 2xl:h-14" />
+        @if (unit.unit() === 'celsius'){
+        <p class="font-semibold text-text md:text-lg 2xl:text-2xl">
+          {{ day.temp_c | number : "1.0-0" }}°C
+        </p>
+        } @else {
+        <p class="font-semibold text-text md:text-lg 2xl:text-2xl">
+          {{ day.temp_f | number : "1.0-0" }}°F
+        </p>
+        }
+        <p
+          class="font-semibold w-[100px] text-right text-text 2xl:text-xl md:w-[160px] 2xl:w-[200px]"
+        >
+          {{ day.date | date : "EEEE, dd MMM" }}
+        </p>
+      </div>
+      }
+    </div>
+  </div>
+  <div
+    class="flex flex-col w-full justify-between items-center max-w-[400px] p-12 bg-primary gap-8 rounded-[30px] drop-shadow-[10px_10px_4px_rgba(0,0,0,0.5)] md:max-w-[700px] md:order-1 2xl:max-w-[850px]"
+  >
+    <h1 class="font-semibold text-text text-xl 2xl:text-3xl">
+      Hourly Forecast:
+    </h1>
+    <div class="grid grid-cols-2 gap-10 md:flex md:w-full md:justify-between">
+      @for (hour of hourlyWeather(); track hour.time) {
+      <div
+        class="flex flex-col rounded-3xl bg-forecast px-6 py-4 justify-between items-center gap-2 md:px-4"
+        [ngClass]="{
+          'bg-forecastSecondary':
+            hour.condition !== 'Sunny' && !theme.isDarkMode()
+        }"
+      >
+        <p class="font-semibold text-text 2xl:text-2xl">
+          {{ hour.time | date : "HH:mm" }}
+        </p>
+        <img src="{{ hour.icon }}" class="w-12 h-12 2xl:w-14 2xl:h-14" />
+        @if (unit.unit() === 'celsius'){
+        <p class="font-semibold text-text 2xl:text-xl">
+          {{ hour.temp_c | number : "1.0-0" }}°C
+        </p>
+        } @else {
+        <p class="font-semibold text-text 2xl:text-xl">
+          {{ hour.temp_f | number : "1.0-0" }}°F
+        </p>
+        }
+        <div
+          class="navigation w-10 h-10 bg-contain 2xl:w-12 2xl:h-12"
+          [ngClass]="hour.wind_direction"
+        ></div>
+        <p class="font-semibold text-text 2xl:text-xl">
+          {{ hour.wind_speed | number : "1.0-0" }}km/h
+        </p>
+      </div>
+      }
+    </div>
+  </div>
+</div>

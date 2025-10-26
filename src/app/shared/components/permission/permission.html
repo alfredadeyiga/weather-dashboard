@@ -1,0 +1,29 @@
+<div
+  class="fixed inset-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] z-30"
+>
+  <div
+    class="flex flex-col bg-primary p-8 rounded-[30px] max-w-[300px] items-center gap-8"
+  >
+    <p class="font-semibold text-text text-lg text-center">
+      Allow Weather Dashboard to access your location?
+    </p>
+    <div class="flex gap-6">
+      <div class="rounded-xl px-4 py-2 bg-red-600 cursor-pointer">
+        <p
+          class="font-bold text-white/80 md:text-lg 2xl:text-xl 2xl:leading-7"
+          (click)="setPermission('no')"
+        >
+          No
+        </p>
+      </div>
+      <div class="rounded-xl px-4 py-2 bg-location cursor-pointer">
+        <p
+          class="font-bold text-white/80 md:text-lg 2xl:text-xl 2xl:leading-7"
+          (click)="setPermission('yes')"
+        >
+          Yes
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

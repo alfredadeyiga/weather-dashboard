@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+@layer base {
+  * {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(
+      110.05deg,
+      #383838 0%,
+      rgba(158, 158, 158, 0) 71.82%
+    );
+  }
+
+  :root {
+    --primary: #444444;
+    --toggle: #d9d9d9;
+    --text: #ffffff;
+    --hover: rgba(255, 255, 255, 0.1);
+    --placeholder: rgba(255, 255, 255, 0.6);
+    --border: transparent;
+    --black: #111111;
+    --gradient: linear-gradient(
+      84.4deg,
+      #ffffff -16.56%,
+      rgba(255, 255, 255, 0) 118.43%
+    );
+    --location: #4cbb17;
+    --forecast: #373636;
+    --forecastSecondary: linear-gradient(
+      168.19deg,
+      #443d64 -19.21%,
+      rgba(101, 130, 198, 0) 158.48%
+    );
+    --spinner: #444444;
+  }
+
+  body.light {
+    background: linear-gradient(135deg, #ffffff 0.28%, #466173 178.65%);
+    --primary: #d9d9d9;
+    --text: #292929;
+    --hover: rgba(255, 255, 255, 0.2);
+    --placeholder: #292929;
+    --border: #000000;
+    --gradient: linear-gradient(
+      80.34deg,
+      #292929 -2.93%,
+      rgba(255, 255, 255, 0) 212.44%
+    );
+    --forecast: linear-gradient(
+      170.72deg,
+      #f88508 -12.41%,
+      rgba(246, 250, 217, 0) 163.32%
+    );
+    --spinner: #2563eb;
+  }
+}
+
+@layer components {
+  body.light .search {
+    background-image: url("/images/search-light.png");
+  }
+
+  body.light .search-nav {
+    background-image: url("/images/search-nav-light.png");
+  }
+
+  body.light .close {
+    background-image: url("/images/close-light.png");
+  }
+
+  body.light .menu {
+    background-image: url("/images/menu-light.png");
+  }
+
+  body.light .sunrise {
+    background-image: url("/images/sunrise-light.png");
+  }
+
+  body.light .sunset {
+    background-image: url("/images/sunset-light.png");
+  }
+
+  body.light .humidity {
+    background-image: url("/images/humidity-light.png");
+  }
+
+  body.light .wind {
+    background-image: url("/images/wind-light.png");
+  }
+
+  body.light .pressure {
+    background-image: url("/images/pressure-light.png");
+  }
+
+  body.light .uv {
+    background-image: url("/images/uv-light.png");
+  }
+}

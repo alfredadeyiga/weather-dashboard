@@ -1,0 +1,39 @@
+<div class="absolute flex inset-0 z-30 lg:hidden">
+  <div
+    class="flex flex-col h-full w-[55vw] bg-primary p-8 gap-8 md:gap-10 md:py-12 md:px-16"
+  >
+    <div
+      class="close w-7 h-7 bg-contain ml-auto"
+      (click)="toggleSidebar()"
+    ></div>
+    <div class="flex flex-col gap-1">
+      <p class="font-bold text-text text-lg md:text-xl">
+        {{ theme.isDarkMode() ? "Dark mode" : "Light mode" }}
+      </p>
+      <div
+        class="flex w-20 h-8 bg-toggle border border-border rounded-full items-center px-1"
+      >
+        <div
+          class="w-[25px] h-[25px] bg-black rounded-full cursor-pointer transition-transform duration-300 ease-in-out"
+          (click)="theme.changeTheme()"
+          [ngClass]="{ 'translate-x-[46px]': theme.isDarkMode() }"
+        ></div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-1">
+      <p class="font-bold text-text text-lg md:text-xl">
+        {{ unit.unit() === "celsius" ? "Celsius" : "Fahrenheit" }}
+      </p>
+      <div
+        class="flex w-20 h-8 bg-toggle border border-border rounded-full items-center px-1"
+      >
+        <div
+          class="w-[25px] h-[25px] bg-black rounded-full cursor-pointer transition-transform duration-300 ease-in-out"
+          (click)="unit.changeUnit()"
+          [ngClass]="{ 'translate-x-[46px]': unit.unit() === 'fahrenheit' }"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="h-full w-[45vw] bg-[rgba(0,0,0,0.5)]" #overlayRef></div>
+</div>
